@@ -51,13 +51,13 @@ resource "aws_cloudwatch_dashboard" "main" {
         "metrics": [
           [
             "${var.student_name}",
-            "account_over_2m.value"
+            "account_count_over_2m.value"
           ]
         ],
         "period": 60,
         "stat": "Maximum",
         "region": "eu-west-1",
-        "title": "Account over 2m"
+        "title": "Accounts over 2m"
       }
     }
 
