@@ -21,8 +21,8 @@ resource "aws_cloudwatch_metric_alarm" "account_count_over_2m" {
   comparison_operator = "GreaterThanThreshold"
   threshold           = 0  # Trigger alarm if any account has more than 2,000,000
   evaluation_periods  = "2"
-  period              = "60"
-  statistic           = "Maximum"
+  period              = "15"
+  statistic           = "Sum"
 
   alarm_description   = "This alarm goes off if any account has more than 2,000,000."
   alarm_actions       = [aws_sns_topic.user_updates.arn]
