@@ -13,10 +13,10 @@ resource "aws_cloudwatch_metric_alarm" "threshold" {
   alarm_actions     = [aws_sns_topic.user_updates.arn]
 }
 
-resource "aws_cloudwatch_metric_alarm" "account_over_2m_alarm" {
-  alarm_name          = "${var.prefix}-account-over-2m"
+resource "aws_cloudwatch_metric_alarm" "account_count_over_2m" {
+  alarm_name          = "${var.prefix}-account_count_over_2m"
   namespace           = var.prefix
-  metric_name         = "account_over_2m.value"
+  metric_name         = "account_count_over_2m.value"
 
   comparison_operator = "GreaterThanThreshold"
   threshold           = 0  # Trigger alarm if any account has more than 2,000,000
