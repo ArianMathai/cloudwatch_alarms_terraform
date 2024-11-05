@@ -23,19 +23,19 @@ jobs:
           terraform_version: '1.7.4'  # Specify your Terraform version
 
       - name: Terraform Init
-        run: terraform init -chdir=./infra
+        run: cd infra/ && terraform init
 
       - name: Terraform Format Check
-        run: terraform fmt -check -chdir=./infra
+        run: cd infra/ && terraform fmt -check
 
       - name: Terraform Validate
-        run: terraform validate -chdir=./infra
+        run: cd infra/ && terraform validate
 
       - name: Terraform Plan
         if: github.event_name == 'pull_request'
-        run: terraform plan -no-color -var="alarm_email=${{ secrets.ALARM_EMAIL }}" -chdir=./infra
+        run: cd infra/ && terraform plan -no-color -var="alarm_email=${{ secrets.ALARM_EMAIL }}"
         continue-on-error: true
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -auto-approve -var="alarm_email=${{ secrets.ALARM_EMAIL }}" -chdir=./infra
+        run: cd infra/ && terraform apply -auto-approve -var="alarm_email=${{ secrets.ALARM_EMAIL }}"
