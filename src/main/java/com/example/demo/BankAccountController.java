@@ -116,6 +116,14 @@ public class BankAccountController implements ApplicationListener<ApplicationRea
                                 .sum())
                 .register(meterRegistry);
 
+        // Gauge to check if any account has more than 2,000,000
+        Gauge.builder("account_count_over_2m", theBank,
+                        b -> b.values()
+                                .stream()
+                                .map(Account::getBalance)
+                                .filter(balance -> balance.compareTo(new BigDecimal("2000000")) > 0)
+                                .count())
+                .register(meterRegistry);
 
     }
 
